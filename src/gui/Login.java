@@ -1,16 +1,44 @@
 package gui;
 
+import controllers.LoginController;
+
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame{
     private JPanel contentPane;
     private JTextField usuarioTextField;
-    private JPasswordField passwordTextField;
+    private JTextField passwordTextField;
+
+    private JButton btnNewButton;
+
+    private LoginController loginController;
+
+    public JTextField getUsuarioTextField() {
+        return usuarioTextField;
+    }
+
+    public void setUsuarioTextField(JTextField usuarioTextField) {
+        this.usuarioTextField = usuarioTextField;
+    }
+
+    public JTextField getPasswordTextField() {
+        return passwordTextField;
+    }
+
+    public void setPasswordTextField(JPasswordField passwordTextField) {
+        this.passwordTextField = passwordTextField;
+    }
+
+    public JButton getBtnNewButton() {
+        return btnNewButton;
+    }
 
     public Login() {
+
         setTitle("Login");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,29 +68,18 @@ public class Login extends JFrame{
         panel_1.setLayout(null);
 
         usuarioTextField = new JTextField();
-        usuarioTextField.setBounds(102, 83, 210, 20);
-        usuarioTextField.setFont(new Font("Consolas", Font.PLAIN, 11));
+        usuarioTextField.setBounds(10, 83, 302, 20);
         panel_1.add(usuarioTextField);
         usuarioTextField.setColumns(10);
 
-        JLabel lblNewLabel = new JLabel("Usuario");
-        lblNewLabel.setFont(new Font("Consolas", Font.PLAIN, 11));
-        lblNewLabel.setBounds(10, 86, 82, 14);
-        panel_1.add(lblNewLabel);
-
-        JLabel lblNewLabel_1 = new JLabel("Contraseña");
-        lblNewLabel_1.setFont(new Font("Consolas", Font.PLAIN, 11));
-        lblNewLabel_1.setBounds(10, 126, 82, 14);
-        panel_1.add(lblNewLabel_1);
-
-        passwordTextField = new JPasswordField();
-        passwordTextField.setBounds(102, 123, 210, 20);
+        passwordTextField = new JTextField();
+        passwordTextField.setBounds(10, 145, 302, 20);
         panel_1.add(passwordTextField);
 
         JCheckBox chckbxNewCheckBox = new JCheckBox("Recordar");
         chckbxNewCheckBox.setFont(new Font("Consolas", Font.PLAIN, 11));
         chckbxNewCheckBox.setBackground(new Color(220, 220, 220));
-        chckbxNewCheckBox.setBounds(196, 175, 116, 23);
+        chckbxNewCheckBox.setBounds(10, 172, 116, 23);
         panel_1.add(chckbxNewCheckBox);
 
         JLabel lblNewLabel_2 = new JLabel("Desarrollado por @Devinci404");
@@ -74,12 +91,30 @@ public class Login extends JFrame{
 
         JLabel lblContraseñaIncorrecta = new JLabel("");
         lblContraseñaIncorrecta.setFont(new Font("Consolas", Font.PLAIN, 11));
-        lblContraseñaIncorrecta.setBounds(102, 154, 210, 14);
+        lblContraseñaIncorrecta.setBounds(102, 120, 210, 14);
         panel_1.add(lblContraseñaIncorrecta);
 
         JComboBox comboBox = new JComboBox();
+        comboBox.setFont(new Font("Consolas", Font.PLAIN, 11));
         comboBox.setModel(new DefaultComboBoxModel(new String[] {"Español", "English"}));
         comboBox.setBounds(230, 11, 82, 22);
         panel_1.add(comboBox);
+
+        btnNewButton = new JButton("Login");
+        btnNewButton.setFont(new Font("Consolas", Font.PLAIN, 11));
+        btnNewButton.setBounds(223, 170, 89, 23);
+        btnNewButton.setActionCommand("Login");
+        panel_1.add(btnNewButton);
+
+        JLabel lblNewLabel = new JLabel("Contraseña");
+        lblNewLabel.setFont(new Font("Consolas", Font.PLAIN, 11));
+        lblNewLabel.setBounds(10, 120, 116, 14);
+        panel_1.add(lblNewLabel);
+
+        JLabel lblNewLabel_1 = new JLabel("Usuario");
+        lblNewLabel_1.setFont(new Font("Consolas", Font.PLAIN, 11));
+        lblNewLabel_1.setBounds(10, 58, 116, 14);
+        panel_1.add(lblNewLabel_1);
+        loginController = new LoginController(this);
     }
 }

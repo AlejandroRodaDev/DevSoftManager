@@ -1,5 +1,6 @@
 package util;
 
+import models.Usuario;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +17,6 @@ public class Hibernate {
      * Constructor
      */
     public Hibernate() {
-
     }
 
     /**
@@ -26,7 +26,7 @@ public class Hibernate {
 
         Configuration configuration = new Configuration();
         try {
-            configuration.configure("hibernate.cfg.xml");
+            configuration.configure("Hibernate.xml");
         } catch (HibernateException e) {
             throw new RuntimeException(e);
         }
@@ -42,17 +42,14 @@ public class Hibernate {
     public static void buildSessionFactoryUser() {
 
         Configuration configuration = new Configuration();
-        configuration.configure("hibernateUser.cfg.xml");
+        configuration.configure("Hibernate.xml");
 
-        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Usuario.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                 configuration.getProperties()).build();
-        try {
+
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        } catch (HibernateException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**

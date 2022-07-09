@@ -1,25 +1,24 @@
 package util;
 
-public class DataBase {
     /**
      * Clase DataBase.
      * Contiene los métodos de la base de datos
      */
-    public class DataBaseUtil {
+    public class DataBase {
 
         private boolean conectado;
 
         /**
          * Constructor
          */
-        public DataBaseUtil() {
+        public DataBase() {
         }
 
         /**
          * Método que desconecta de la base de datos
          */
         public void desconectar() {
-            //HibernateUtil.closeSessionFactory();
+            Hibernate.closeSessionFactory();
             conectado=false;
         }
 
@@ -27,6 +26,7 @@ public class DataBase {
          * Método que conecta a la base de datos
          */
         public void conectar() {
+            Hibernate.buildSessionFactory();
             conectado=true;
         }
 
@@ -46,5 +46,4 @@ public class DataBase {
             this.conectado = conectado;
         }
     }
-}
 
