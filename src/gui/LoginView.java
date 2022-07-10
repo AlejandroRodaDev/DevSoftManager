@@ -6,9 +6,8 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
-public class Login extends JFrame{
+public class LoginView extends JFrame{
     private JPanel contentPane;
     private JTextField usuarioTextField;
     private JTextField passwordTextField;
@@ -37,7 +36,7 @@ public class Login extends JFrame{
         return btnNewButton;
     }
 
-    public Login() {
+    public LoginView() {
 
         setTitle("Login");
         setResizable(false);

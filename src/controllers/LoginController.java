@@ -1,6 +1,6 @@
 package controllers;
 
-import gui.Login;
+import gui.LoginView;
 import models.Usuario;
 import org.hibernate.Session;
 import util.Hibernate;
@@ -9,15 +9,19 @@ import javax.persistence.Query;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class LoginController implements ActionListener {
 
-    Login loginView;
-    public LoginController(Login login){
-
-        loginView = login;
+    LoginView loginView;
+    public LoginController(LoginView loginView){
+        this.loginView = loginView;
         addActionListener(this);
+        createConfigurationFile();
     }
 
 
@@ -70,6 +74,45 @@ public class LoginController implements ActionListener {
         ArrayList<Usuario> userList= (ArrayList<Usuario>)query.getResultList();
         sesion.close();
         return userList;
+    }
+
+    /**
+     * ES - Crea el fichero de configuración si no existe.
+     *
+     * @throws IOException
+     */
+    public void createConfigurationFile() {
+
+         File save;  save = new File("login.conf");
+
+        if (!save.exists()) {
+
+            try {
+                save.createNewFile();
+                assignDefaultPropertiesLogin(save);
+            } catch (IOException e) {
+                //AlertUtil.errorAlert("Error creating configuration file");
+            }
+
+            //assignDefaultPropertiesLogin();
+        }
+    }
+
+    /**
+     * ES - Asigna valores por defecto a las propiedades del archivo de configuración.
+     */
+    private void assignDefaultPropertiesLogin(File save) {
+        Properties config = new Properties();
+        config.setProperty("remember", "true");
+        config.setProperty("lastUser", "default");
+        try {
+
+            config.store(new FileWriter(save.getAbsolutePath()),
+                    "Login Settings");
+        } catch (IOException e) {
+
+            //AlertUtil.errorAlert("Error when assigning default properties");
+        }
     }
 
     @Override
