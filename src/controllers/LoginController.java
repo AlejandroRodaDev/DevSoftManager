@@ -1,5 +1,6 @@
 package controllers;
 
+import config.ConfigFile;
 import gui.Login;
 import models.Usuario;
 import org.hibernate.Session;
@@ -14,10 +15,14 @@ import java.util.ArrayList;
 public class LoginController implements ActionListener {
 
     Login loginView;
+    ConfigFile configFile;
+
     public LoginController(Login login){
 
         loginView = login;
         addActionListener(this);
+        configFile = new ConfigFile();
+        configFile.createConfigFile();
     }
 
 
