@@ -1,71 +1,53 @@
 package controllers;
 
 import config.ConfigFile;
-import gui.Login;
+import gui.LoginView;
 import models.Usuario;
 import org.hibernate.Session;
+import util.AlertDialog;
 import util.Hibernate;
 
 import javax.persistence.Query;
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class LoginController implements ActionListener {
 
-    Login loginView;
+    LoginView loginView;
     ConfigFile configFile;
 
-    public LoginController(Login login){
+    public LoginController(LoginView login){
 
         loginView = login;
         addActionListener(this);
         configFile = new ConfigFile();
         configFile.createConfigFile();
+        loadConfig();
     }
-
 
     private void addActionListener(ActionListener actionListener) {
         loginView.getBtnNewButton().addActionListener(actionListener);
     }
 
-
-    /**
-     * ES - Valida que la cuenta introducida existe en la base de datos.
-     */
     private void validateAccount() {
-        Hibernate.buildSessionFactoryUser();
         boolean accepted = false;
+        Hibernate.buildSessionFactoryUser();
 
         for (Usuario usuario : getUsuario()) {
 
             if (loginView.getUsuarioTextField().getText().equals(usuario.getUsuario()) &&
                     loginView.getPasswordTextField().getText().equals(usuario.getPassword())) {
-
-                //usuarioActual = user;
                 accepted = true;
-                //updateConfigurationFile();
-                //disconnectToUserDatabase();
+                configFile.updateConfigFile(rememberMe(), getUser());
             }
             Hibernate.closeSessionFactory();
         }
-
         if (!accepted) {
-            //JOptionPane.showMessageDialog(null,
-                    //configDictionary.getProperty("userInvalid"));
-            JOptionPane.showMessageDialog(null,"Usuario Inválido");
+            AlertDialog.messageDialog("Usuario Inválido");
 
         } else if (accepted) {
-            //JOptionPane.showMessageDialog(null,
-                    //configDictionary.getProperty("userAccepted"));
-            //updateLanguageFile();
-
-            JOptionPane.showMessageDialog(null,"Usuario Aceptado");
-            //MainView view = new MainView();
-            //Model model = new Model();
-            //MainViewController controller = new MainViewController(view, model, rol, usuarioActual);
-            //dispose();
+            AlertDialog.messageDialog("Usuario Aceptado");
         }
     }
 
@@ -77,9 +59,34 @@ public class LoginController implements ActionListener {
         return userList;
     }
 
+    private void loadConfig() {
+        loadRememberUser();
+    }
+
+    private void loadRememberUser() {
+        if(configFile.getValue("remember").equalsIgnoreCase("true")){
+            loginView.getUsuarioTextField().setText(configFile.getValue("lastUser"));
+            loginView.getChckbxRememberMe().setSelected(true);
+        }else{
+            loginView.getChckbxRememberMe().setSelected(false);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Funciona");
         validateAccount();
+    }
+
+    private String rememberMe(){
+
+        if(loginView.getChckbxRememberMe().isSelected()){
+            return "true";
+        }else{
+            return  "false";
+        }
+    }
+
+    private String getUser(){
+        return loginView.getUsuarioTextField().getText();
     }
 }

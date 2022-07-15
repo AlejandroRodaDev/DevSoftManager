@@ -6,12 +6,13 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
-public class Login extends JFrame{
+public class LoginView extends JFrame{
     private JPanel contentPane;
     private JTextField usuarioTextField;
     private JTextField passwordTextField;
+
+    private JCheckBox chckbxRememberMe;
 
     private JButton btnNewButton;
 
@@ -21,23 +22,21 @@ public class Login extends JFrame{
         return usuarioTextField;
     }
 
-    public void setUsuarioTextField(JTextField usuarioTextField) {
-        this.usuarioTextField = usuarioTextField;
-    }
 
     public JTextField getPasswordTextField() {
         return passwordTextField;
     }
 
-    public void setPasswordTextField(JPasswordField passwordTextField) {
-        this.passwordTextField = passwordTextField;
-    }
 
     public JButton getBtnNewButton() {
         return btnNewButton;
     }
 
-    public Login() {
+    public JCheckBox getChckbxRememberMe() {
+        return chckbxRememberMe;
+    }
+
+    public LoginView() {
 
         setTitle("Login");
         setResizable(false);
@@ -76,11 +75,11 @@ public class Login extends JFrame{
         passwordTextField.setBounds(10, 145, 302, 20);
         panel_1.add(passwordTextField);
 
-        JCheckBox chckbxNewCheckBox = new JCheckBox("Recordar");
-        chckbxNewCheckBox.setFont(new Font("Consolas", Font.PLAIN, 11));
-        chckbxNewCheckBox.setBackground(new Color(220, 220, 220));
-        chckbxNewCheckBox.setBounds(10, 172, 116, 23);
-        panel_1.add(chckbxNewCheckBox);
+        chckbxRememberMe = new JCheckBox("Recordar");
+        chckbxRememberMe.setFont(new Font("Consolas", Font.PLAIN, 11));
+        chckbxRememberMe.setBackground(new Color(220, 220, 220));
+        chckbxRememberMe.setBounds(10, 172, 116, 23);
+        panel_1.add(chckbxRememberMe);
 
         JLabel lblNewLabel_2 = new JLabel("Desarrollado por @Devinci404");
         lblNewLabel_2.setFont(new Font("Consolas", Font.PLAIN, 11));

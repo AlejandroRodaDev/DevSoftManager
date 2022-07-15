@@ -1,5 +1,7 @@
 package config;
 
+import util.AlertDialog;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -25,7 +27,7 @@ public class ConfigFile {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                //AlertUtil.errorAlert("Error creating configuration file");
+                AlertDialog.errorDialog("Error creating configuration file");
             }
             assignDefaultConfigFile();
         }
@@ -38,7 +40,7 @@ public class ConfigFile {
             properties.store(new FileWriter(file.getAbsolutePath()),
                     "Configuration Settings");
         } catch (IOException e) {
-            //AlertUtil.errorAlert("Error when assigning default properties");
+            AlertDialog.errorDialog("Error when assigning default properties");
         }
     }
 
@@ -47,17 +49,32 @@ public class ConfigFile {
         try {
             properties.load(new FileReader(path));
         } catch (IOException e) {
-            //AlertUtil.errorAlert("Error loading configuration file");
+            AlertDialog.errorDialog("Error loading configuration file");
         }
     }
 
-    private void updateConfigFile() {
+    public void updateConfigFile(String remember, String user) {
+         file = new File(path);
 
+            properties.setProperty("remember", remember);
+            properties.setProperty("lastUser", user);
+
+            try {
+                properties.store(new FileWriter(file.getAbsolutePath()),
+                        "Login Settings");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     private void addProperties(){
         properties.setProperty("remember", "true");
         properties.setProperty("lastUser", "default");
         properties.setProperty("language", "es_ES");
+    }
+
+    public String getValue(String property){
+        loadConfigFile();
+        return properties.getProperty(property);
     }
 }

@@ -1,9 +1,9 @@
-import gui.Login;
+import gui.LoginView;
 
 
 public class Main {
     public static void main (String [ ] args) {
-        Login login = new Login();
-        login.setVisible(true);
+        LoginView loginView = new LoginView();
+        loginView.setVisible(true);
     }
 }
