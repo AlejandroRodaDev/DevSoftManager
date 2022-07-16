@@ -18,7 +18,6 @@ public class LoginController implements ActionListener {
     ConfigFile configFile;
 
     public LoginController(LoginView login){
-
         loginView = login;
         addActionListener(this);
         configFile = new ConfigFile();
@@ -39,7 +38,7 @@ public class LoginController implements ActionListener {
             if (loginView.getUsuarioTextField().getText().equals(usuario.getUsuario()) &&
                     loginView.getPasswordTextField().getText().equals(usuario.getPassword())) {
                 accepted = true;
-                configFile.updateConfigFile(rememberMe(), getUser());
+                configFile.updateConfigFile(rememberMe(), getUser(),getLanguage());
             }
             Hibernate.closeSessionFactory();
         }
@@ -61,6 +60,7 @@ public class LoginController implements ActionListener {
 
     private void loadConfig() {
         loadRememberUser();
+        loadLanguage();
     }
 
     private void loadRememberUser() {
@@ -86,7 +86,24 @@ public class LoginController implements ActionListener {
         }
     }
 
+    private String getLanguage(){
+
+        if(loginView.getComboBox().getSelectedIndex() == 0){
+            return "es_ES";
+        }else{
+            return "en_EN";
+        }
+    }
+
     private String getUser(){
         return loginView.getUsuarioTextField().getText();
+    }
+
+    private void loadLanguage(){
+        if(configFile.getValue("language").equalsIgnoreCase("es_ES")){
+            loginView.getComboBox().setSelectedIndex(0);
+        }else if(configFile.getValue("language").equalsIgnoreCase("en_EN")) {
+            loginView.getComboBox().setSelectedIndex(1);
+        }
     }
 }

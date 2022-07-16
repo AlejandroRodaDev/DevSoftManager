@@ -18,6 +18,8 @@ public class LoginView extends JFrame{
 
     private LoginController loginController;
 
+    private JComboBox comboBox;
+
     public JTextField getUsuarioTextField() {
         return usuarioTextField;
     }
@@ -34,6 +36,10 @@ public class LoginView extends JFrame{
 
     public JCheckBox getChckbxRememberMe() {
         return chckbxRememberMe;
+    }
+
+    public JComboBox getComboBox() {
+        return comboBox;
     }
 
     public LoginView() {
@@ -93,7 +99,7 @@ public class LoginView extends JFrame{
         lblContraseñaIncorrecta.setBounds(102, 120, 210, 14);
         panel_1.add(lblContraseñaIncorrecta);
 
-        JComboBox comboBox = new JComboBox();
+        comboBox = new JComboBox();
         comboBox.setFont(new Font("Consolas", Font.PLAIN, 11));
         comboBox.setModel(new DefaultComboBoxModel(new String[] {"Español", "English"}));
         comboBox.setBounds(230, 11, 82, 22);

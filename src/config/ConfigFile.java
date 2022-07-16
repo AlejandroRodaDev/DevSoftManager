@@ -53,11 +53,12 @@ public class ConfigFile {
         }
     }
 
-    public void updateConfigFile(String remember, String user) {
+    public void updateConfigFile(String remember, String user, String language) {
          file = new File(path);
 
-            properties.setProperty("remember", remember);
-            properties.setProperty("lastUser", user);
+         properties.setProperty("remember", remember);
+         properties.setProperty("lastUser", user);
+         properties.setProperty("language", language);
 
             try {
                 properties.store(new FileWriter(file.getAbsolutePath()),

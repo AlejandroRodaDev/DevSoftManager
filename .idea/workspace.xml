@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f518d56f-4727-4ffd-86c6-0e139109ba53" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/util/AlertDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config/ConfigFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/ConfigFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/LoginView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +106,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="752baab1-5b24-4d74-acab-90bc0344c562" name="Changes" comment="" />
+      <changelist id="f518d56f-4727-4ffd-86c6-0e139109ba53" name="Changes" comment="" />
       <created>1657300450204</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -120,6 +118,7 @@
       <workItem from="1657491235685" duration="1641000" />
       <workItem from="1657748161577" duration="2907000" />
       <workItem from="1657823951301" duration="3158000" />
+      <workItem from="1657966511905" duration="5547000" />
     </task>
     <task id="LOCAL-00001" summary="Primer Commit">
       <created>1657300489642</created>
@@ -142,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657383653929</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Cambios en los mensajes de alerta y mejoras en el archivo de configuración y su carga">
+      <created>1657909590319</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1657909590319</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,17 +169,7 @@
     <MESSAGE value="Primer Commit" />
     <MESSAGE value="Cambios en el Login, y en la conexión a la bbbdd" />
     <MESSAGE value="Cambios en el inicio de sesion, funcionamiento del botón Login" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambios en el inicio de sesion, funcionamiento del botón Login" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controllers/LoginController.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Cambios en los mensajes de alerta y mejoras en el archivo de configuración y su carga" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambios en los mensajes de alerta y mejoras en el archivo de configuración y su carga" />
   </component>
 </project>
