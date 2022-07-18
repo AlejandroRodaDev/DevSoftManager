@@ -1,4 +1,4 @@
-import gui.LoginView;
+import views.LoginView;
 
 
 public class Main {

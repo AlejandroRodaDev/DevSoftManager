@@ -1,41 +1,38 @@
 package config;
 
+//region Imports
 import util.AlertDialog;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Properties;
+//endregion
 
 public class ConfigFile {
 
+    //region Var
     private File file;
     private Properties properties;
-    private final String path = "src/config\\Settings.properties";
+    private static final String PATH = "src/config\\Settings.properties";
+    //endregion
 
+    //region Builder
     public ConfigFile() {
+        init();
+    }
+    //endregion
+
+    //region Init
+    private void init(){
         properties = new Properties();
+        file = new File(PATH);
     }
+    //endregion
 
-    public void createConfigFile(){
-
-        file = new File(path);
-
-        if (!file.exists()) {
-
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                AlertDialog.errorDialog("Error creating configuration file");
-            }
-            assignDefaultConfigFile();
-        }
-    }
-
-    private void assignDefaultConfigFile() {
-
-        addProperties();
+    //region Private Methods
+    private void setDefaultConfigFile() {
+        setDefaultProperties();
         try {
             properties.store(new FileWriter(file.getAbsolutePath()),
                     "Configuration Settings");
@@ -44,38 +41,52 @@ public class ConfigFile {
         }
     }
 
-    public void loadConfigFile() {
-
-        try {
-            properties.load(new FileReader(path));
-        } catch (IOException e) {
-            AlertDialog.errorDialog("Error loading configuration file");
-        }
-    }
-
-    public void updateConfigFile(String remember, String user, String language) {
-         file = new File(path);
-
-         properties.setProperty("remember", remember);
-         properties.setProperty("lastUser", user);
-         properties.setProperty("language", language);
-
-            try {
-                properties.store(new FileWriter(file.getAbsolutePath()),
-                        "Login Settings");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-    }
-
-    private void addProperties(){
+    private void setDefaultProperties(){
         properties.setProperty("remember", "true");
         properties.setProperty("lastUser", "default");
         properties.setProperty("language", "es_ES");
     }
 
+    private void setProperties(String remember, String user, String language){
+        properties.setProperty("remember", remember);
+        properties.setProperty("lastUser", user);
+        properties.setProperty("language", language);
+    }
+
+    private void readConfigFile() {
+        try {
+            properties.load(new FileReader(PATH));
+        } catch (IOException e) {
+            AlertDialog.errorDialog("Error reading configuration file");
+        }
+    }
+    //endregion
+
+    //region Public Methods
+    public void createConfigFile(){
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                AlertDialog.errorDialog("Error creating configuration file");
+            }
+            setDefaultConfigFile();
+        }
+    }
+
     public String getValue(String property){
-        loadConfigFile();
+        readConfigFile();
         return properties.getProperty(property);
     }
+
+    public void updateConfigFile(String remember, String user, String language) {
+       setProperties(remember,user, language);
+        try {
+            properties.store(new FileWriter(file.getAbsolutePath()),
+                    "Login Settings");
+        } catch (IOException e) {
+            AlertDialog.errorDialog("Error updating configuration file");
+        }
+    }
+    //endregion
 }

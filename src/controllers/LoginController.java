@@ -1,47 +1,103 @@
 package controllers;
 
+//region Imports
 import config.ConfigFile;
-import gui.LoginView;
+import views.LoginView;
 import models.Usuario;
 import org.hibernate.Session;
 import util.AlertDialog;
+import util.DataBase;
 import util.Hibernate;
 
 import javax.persistence.Query;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
+//endregion
 
-public class LoginController implements ActionListener {
+public class LoginController implements ActionListener, ItemListener {
 
-    LoginView loginView;
-    ConfigFile configFile;
+    //region Var
+    private LoginView loginView;
+    private ConfigFile configFile;
+    private DataBase dataBase;
+    private boolean accepted;
+    //endregion
 
+    //region Builder
     public LoginController(LoginView login){
+        init(login);
+        addListeners();
+    }
+    //endregion
+
+    //region Init
+    private void init(LoginView login){
         loginView = login;
-        addActionListener(this);
+        dataBase = new DataBase();
         configFile = new ConfigFile();
+        accepted = false;
         configFile.createConfigFile();
         loadConfig();
     }
+    //endregion
 
-    private void addActionListener(ActionListener actionListener) {
-        loginView.getBtnNewButton().addActionListener(actionListener);
+    //region Private Methods
+
+    private void addListeners() {
+        loginView.getBtnNewAccept().addActionListener(this);
+        loginView.getComboBoxLanguage().addItemListener(this);
     }
 
-    private void validateAccount() {
-        boolean accepted = false;
-        Hibernate.buildSessionFactoryUser();
-
-        for (Usuario usuario : getUsuario()) {
-
-            if (loginView.getUsuarioTextField().getText().equals(usuario.getUsuario()) &&
-                    loginView.getPasswordTextField().getText().equals(usuario.getPassword())) {
-                accepted = true;
-                configFile.updateConfigFile(rememberMe(), getUser(),getLanguage());
-            }
-            Hibernate.closeSessionFactory();
+    //region gets
+    private ArrayList<Usuario> getUsers() {
+        Session session = Hibernate.getCurrentSession();
+        Query query = session.createQuery("FROM Usuario ");
+        ArrayList<Usuario> userList= (ArrayList<Usuario>)query.getResultList();
+        session.close();
+        return userList;
+    }
+    private String getRememberMe(){
+        if(loginView.getCheckboxRememberMe().isSelected()){
+            return "true";
+        }else{
+            return  "false";
         }
+    }
+
+    private String getLanguage(){
+        if(loginView.getComboBoxLanguage().getSelectedIndex() == 0){
+            return "es_ES";
+        }else{
+            return "en_EN";
+        }
+    }
+
+    private String getUser(){
+        return loginView.getTextFieldUser().getText();
+    }
+    //endregion
+
+    private void validateAccount() {
+        checkAccounts();
+        acceptAccount();
+    }
+
+    private void checkAccounts(){
+        dataBase.connect();
+        for (Usuario usuario : getUsers()) {
+            if (loginView.getTextFieldUser().getText().equals(usuario.getUsuario()) &&
+                    loginView.getTextFieldPassword().getText().equals(usuario.getPassword())) {
+                accepted = true;
+                configFile.updateConfigFile(getRememberMe(), getUser(),getLanguage());
+            }
+        }
+        dataBase.disconnect();
+    }
+
+    private void acceptAccount(){
         if (!accepted) {
             AlertDialog.messageDialog("Usuario Inválido");
 
@@ -50,14 +106,7 @@ public class LoginController implements ActionListener {
         }
     }
 
-    private ArrayList<Usuario> getUsuario() {
-        Session sesion = Hibernate.getCurrentSession();
-        Query query = sesion.createQuery("FROM Usuario ");
-        ArrayList<Usuario> userList= (ArrayList<Usuario>)query.getResultList();
-        sesion.close();
-        return userList;
-    }
-
+    //region loads
     private void loadConfig() {
         loadRememberUser();
         loadLanguage();
@@ -65,45 +114,35 @@ public class LoginController implements ActionListener {
 
     private void loadRememberUser() {
         if(configFile.getValue("remember").equalsIgnoreCase("true")){
-            loginView.getUsuarioTextField().setText(configFile.getValue("lastUser"));
-            loginView.getChckbxRememberMe().setSelected(true);
+            loginView.getTextFieldUser().setText(configFile.getValue("lastUser"));
+            loginView.getCheckboxRememberMe().setSelected(true);
         }else{
-            loginView.getChckbxRememberMe().setSelected(false);
+            loginView.getCheckboxRememberMe().setSelected(false);
         }
     }
 
+    private void loadLanguage(){
+        if(configFile.getValue("language").equalsIgnoreCase("es_ES")){
+            loginView.getComboBoxLanguage().setSelectedIndex(0);
+        }else if(configFile.getValue("language").equalsIgnoreCase("en_EN")) {
+            loginView.getComboBoxLanguage().setSelectedIndex(1);
+        }
+    }
+    //endregion
+
+    //endregion
+
+    //region Public Methods
     @Override
     public void actionPerformed(ActionEvent e) {
         validateAccount();
     }
 
-    private String rememberMe(){
-
-        if(loginView.getChckbxRememberMe().isSelected()){
-            return "true";
-        }else{
-            return  "false";
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+            configFile.updateConfigFile(getRememberMe(), getUser(),getLanguage());
         }
     }
-
-    private String getLanguage(){
-
-        if(loginView.getComboBox().getSelectedIndex() == 0){
-            return "es_ES";
-        }else{
-            return "en_EN";
-        }
-    }
-
-    private String getUser(){
-        return loginView.getUsuarioTextField().getText();
-    }
-
-    private void loadLanguage(){
-        if(configFile.getValue("language").equalsIgnoreCase("es_ES")){
-            loginView.getComboBox().setSelectedIndex(0);
-        }else if(configFile.getValue("language").equalsIgnoreCase("en_EN")) {
-            loginView.getComboBox().setSelectedIndex(1);
-        }
-    }
+    //endregion
 }

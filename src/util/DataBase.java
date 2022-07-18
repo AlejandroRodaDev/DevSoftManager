@@ -17,7 +17,7 @@ package util;
         /**
          * Método que desconecta de la base de datos
          */
-        public void desconectar() {
+        public void disconnect() {
             Hibernate.closeSessionFactory();
             conectado=false;
         }
@@ -25,8 +25,8 @@ package util;
         /**
          * Método que conecta a la base de datos
          */
-        public void conectar() {
-            Hibernate.buildSessionFactory();
+        public void connect() {
+            Hibernate.buildSessionFactoryUser();
             conectado=true;
         }
 
@@ -34,7 +34,7 @@ package util;
          * Getter isConectado
          * @return conectado
          */
-        public boolean isConectado() {
+        public boolean isConnect() {
             return conectado;
         }
 
@@ -42,7 +42,7 @@ package util;
          * Setter setConectado
          * @param conectado
          */
-        public void setConectado(boolean conectado) {
+        public void setConnect(boolean conectado) {
             this.conectado = conectado;
         }
     }
