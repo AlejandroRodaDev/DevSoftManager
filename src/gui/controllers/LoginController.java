@@ -1,23 +1,21 @@
-package controllers;
+package gui.controllers;
 
 //region Imports
 import config.ConfigFile;
-import views.LoginView;
+import gui.views.LoginView;
+import gui.views.RegisterView;
 import models.Usuario;
 import org.hibernate.Session;
 import util.AlertDialog;
-import util.DataBase;
-import util.Hibernate;
+import dataBase.DataBase;
+import dataBase.Hibernate;
 
 import javax.persistence.Query;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 //endregion
 
-public class LoginController implements ActionListener, ItemListener {
+public class LoginController implements ActionListener, ItemListener, MouseListener {
 
     //region Var
     private LoginView loginView;
@@ -49,6 +47,7 @@ public class LoginController implements ActionListener, ItemListener {
     private void addListeners() {
         loginView.getBtnNewAccept().addActionListener(this);
         loginView.getComboBoxLanguage().addItemListener(this);
+        loginView.getLblRegister().addMouseListener(this);
     }
 
     //region gets
@@ -143,6 +142,32 @@ public class LoginController implements ActionListener, ItemListener {
         if (e.getStateChange() == ItemEvent.SELECTED) {
             configFile.updateConfigFile(getRememberMe(), getUser(),getLanguage());
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        RegisterView registerView = new RegisterView();
+        registerView.setVisible(true);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
     //endregion
 }

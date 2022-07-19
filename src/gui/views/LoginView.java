@@ -1,7 +1,7 @@
-package views;
+package gui.views;
 
 //region Imports
-import controllers.LoginController;
+import gui.controllers.LoginController;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
@@ -17,7 +17,7 @@ public class LoginView extends JFrame{
     private JCheckBox checkboxRememberMe;
     private JButton btnNewAccept;
     private JComboBox comboBoxLanguage;
-    private JLabel lblIncorrectPassword;
+    private JLabel lblRegister;
     //endregion
 
     //region Getters
@@ -40,9 +40,14 @@ public class LoginView extends JFrame{
     public JComboBox getComboBoxLanguage() {
         return comboBoxLanguage;
     }
+
+    public JLabel getLblRegister() {
+        return lblRegister;
+    }
+
     //endregion
 
-    //region Builder
+    //region Constructor
     public LoginView() {
         setTitle("Login");
         setResizable(false);
@@ -64,6 +69,13 @@ public class LoginView extends JFrame{
         lblImage.setIcon(new ImageIcon("C:\\Users\\aleja\\Downloads\\security.png"));
         lblImage.setBounds(10, 11, 93, 79);
         panel.add(lblImage);
+
+        lblRegister = new JLabel("Registarse");
+        lblRegister.setForeground(Color.WHITE);
+        lblRegister.setHorizontalAlignment(SwingConstants.CENTER);
+        lblRegister.setFont(new Font("Consolas", Font.PLAIN, 11));
+        lblRegister.setBounds(10, 236, 93, 14);
+        panel.add(lblRegister);
 
         JPanel panel_1 = new JPanel();
         panel_1.setBorder(new CompoundBorder());
@@ -94,11 +106,6 @@ public class LoginView extends JFrame{
         lblNewLabel_2.setBounds(10, 236, 302, 14);
         panel_1.add(lblNewLabel_2);
 
-        lblIncorrectPassword = new JLabel("");
-        lblIncorrectPassword.setFont(new Font("Consolas", Font.PLAIN, 11));
-        lblIncorrectPassword.setBounds(102, 120, 210, 14);
-        panel_1.add(lblIncorrectPassword);
-
         comboBoxLanguage = new JComboBox();
         comboBoxLanguage.setFont(new Font("Consolas", Font.PLAIN, 11));
         comboBoxLanguage.setModel(new DefaultComboBoxModel(new String[] {"Español", "English"}));
@@ -120,6 +127,7 @@ public class LoginView extends JFrame{
         lblNewLabel_1.setFont(new Font("Consolas", Font.PLAIN, 11));
         lblNewLabel_1.setBounds(10, 58, 116, 14);
         panel_1.add(lblNewLabel_1);
+
         LoginController loginController = new LoginController(this);
     }
     //endregion

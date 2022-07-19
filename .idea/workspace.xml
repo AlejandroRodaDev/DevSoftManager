@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f518d56f-4727-4ffd-86c6-0e139109ba53" name="Changes" comment="Implementada la funcionalidad del selector de idioma">
+    <list default="true" id="f518d56f-4727-4ffd-86c6-0e139109ba53" name="Changes" comment="Refactorización del código">
+      <change afterPath="$PROJECT_DIR$/src/encrypt/EncryptAES.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/controllers/RegisterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/views/RegisterView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/ConfigFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/ConfigFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataBase/DataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Hibernate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataBase/Hibernate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/views/LoginView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +23,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="package-info" />
         <option value="Class" />
       </list>
     </option>
@@ -37,34 +42,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JPA.DatabaseSchemaImportDialog": "4828de5b-5db1-44d2-9ada-1a9ef633d5f5",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "openjdk-18",
-    "last_opened_file_path": "E:/Proyectos/MusicManagersSoftware/Proyecto",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15722656",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "settings.editor.splitter.proportion": "0.20977597"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;4828de5b-5db1-44d2-9ada-1a9ef633d5f5&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-18&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/aleja/IdeaProjects/DevSoftManager/src/gui/views&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15722656&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.20977597&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\aleja\IdeaProjects\DevSoftManager\src\gui\views" />
       <recent name="C:\Users\aleja\IdeaProjects\DevSoftManager\lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -77,19 +83,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="Login" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="gui.Login" />
-      <module name="DevSoftManager" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="gui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="DevSoftManager" />
@@ -97,10 +90,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="gui.Login" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="gui.Login" />
+      <module name="DevSoftManager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="gui.views.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Login" />
       </list>
     </recent_temporary>
   </component>
@@ -122,7 +127,10 @@
       <workItem from="1657966511905" duration="5945000" />
       <workItem from="1657988970434" duration="1666000" />
       <workItem from="1657992213524" duration="1894000" />
-      <workItem from="1658097776960" duration="6728000" />
+      <workItem from="1658097776960" duration="6877000" />
+      <workItem from="1658134032475" duration="8170000" />
+      <workItem from="1658179936775" duration="2798000" />
+      <workItem from="1658251769181" duration="6056000" />
     </task>
     <task id="LOCAL-00001" summary="Primer Commit">
       <created>1657300489642</created>
@@ -159,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657976840507</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Refactorización del código">
+      <created>1658105230850</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1658105230851</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +209,7 @@
     <MESSAGE value="Cambios en el inicio de sesion, funcionamiento del botón Login" />
     <MESSAGE value="Cambios en los mensajes de alerta y mejoras en el archivo de configuración y su carga" />
     <MESSAGE value="Implementada la funcionalidad del selector de idioma" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementada la funcionalidad del selector de idioma" />
+    <MESSAGE value="Refactorización del código" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactorización del código" />
   </component>
 </project>

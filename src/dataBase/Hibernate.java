@@ -1,4 +1,4 @@
-package util;
+package dataBase;
 
 import models.Usuario;
 import org.hibernate.HibernateException;
